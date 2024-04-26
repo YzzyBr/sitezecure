@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZecureGuard - Criar Conta</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #ff0000;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff0000;
+        }
+
+        img.logo {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h2>Criar Conta</h2>
+        <form id="registerForm" onsubmit="return registerUser()">
+            <input type="text" id="newUsername" placeholder="Novo Usuário" required>
+            <input type="password" id="newPassword" placeholder="Nova Senha" required>
+            <input type="submit" value="Criar Conta">
+        </form>
+    </div>
+
+    <script>
+        // Função para registrar um novo usuário
+        function registerUser() {
+            // Obtém os dados do formulário
+            var newUsername = document.getElementById("newUsername").value;
+            var newPassword = document.getElementById("newPassword").value;
+
+            // Cria um objeto com os dados do novo usuário
+            var newUser = {
+                username: newUsername,
+                password: newPassword
+            };
+
+            // Verifica se já existe algum registro no armazenamento local
+            var users = localStorage.getItem("users");
+            if (!users) {
+                // Se não houver registros, cria um array vazio
+                users = [];
+            } else {
+                // Se houver registros, converte a string para array
+                users = JSON.parse(users);
+            }
+
+            // Adiciona o novo usuário ao array
+            users.push(newUser);
+
+            // Salva o array atualizado no armazenamento local
+            localStorage.setItem("users", JSON.stringify(users));
+
+            // Exibe mensagem de sucesso
+            alert("Conta criada com sucesso! Faça login para continuar.");
+            // Redireciona para a página de login
+            window.location.href = "login.html";
+            return false;
+        }
+    </script>
+</body>
+
+</html>
