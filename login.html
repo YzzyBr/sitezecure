@@ -1,150 +1,176 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZecureGuard - Login</title>
+    <title>ZecureGuard - Acesso</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #333333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 300px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
             box-sizing: border-box;
         }
 
-        input[type="submit"] {
-            background-color: #ff0000;
-            color: #ffffff;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-color: #4b0000; /* Vermelho um pouco mais vibrante */
+        }
+
+        /* Efeito de transição da página */
+        body.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .login-container {
+            text-align: center;
+            background-color: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            animation: zoom-in 1s ease-out;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Efeito de hover na caixa de login */
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo img {
+            width: 120px;
+            margin-bottom: 10px;
+            animation: slide-down 1s ease-out;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 40px;
+            animation: fade-in 1.2s ease-out;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-form button {
+            padding: 15px;
+            background-color: #d32f2f;
+            color: white;
             border: none;
-            padding: 10px;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: fade-in 1.5s ease-out, pulse 2s infinite;
         }
 
-        input[type="submit"]:hover {
-            background-color: #ff0000;
+        /* Efeito de pulso no botão */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
-        /* Botão de troca de tema */
-        .theme-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: transparent;
-            color: #333333;
-            border: 1px solid #333333;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
+        .login-form button:hover {
+            background-color: #b71c1c;
+            transform: scale(1.1);
         }
 
-        .theme-button:hover {
-            background-color: #333333;
-            color: #ffffff;
+        .login-form button:active {
+            background-color: #f44336;
         }
 
-        /* Estilos para o tema escuro */
-        body.dark-mode {
-            background-color: #333333;
-            color: #ffffff;
+        .login-form button:focus {
+            outline: none;
+            box-shadow: 0 0 5px 2px rgba(211, 47, 47, 0.6);
         }
 
-        .dark-mode .container {
-            background-color: #333333;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        /* Animação para logo e título */
+        @keyframes slide-down {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .dark-mode input[type="text"],
-        .dark-mode input[type="password"],
-        .dark-mode input[type="submit"] {
-            background-color: #666666;
-            color: #ffffff;
-            border: 1px solid #ffffff;
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoom-in {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
-
-<body class="light-mode">
-    <div class="container">
-        <button class="theme-button" onclick="toggleDarkMode()">Tema</button>
-        <img src="logo.png" alt="Logo" style="display: block; margin: 0 auto; margin-bottom: 20px;">
-        <h2>Área de login ZecureGuard</h2>
-        <form id="loginForm" onsubmit="return loginUser()">
-            <input type="text" id="username" placeholder="Usuário" required>
-            <input type="password" id="password" placeholder="Senha" required>
-            <input type="submit" value="Entrar">
+<body>
+    <div class="login-container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <!-- Nome da marca -->
+        <div class="brand">ZecureGuard</div>
+        <!-- Formulário -->
+        <form class="login-form">
+            <button type="button" id="access-btn">Acessar</button>
         </form>
-        <p style="text-align: center; margin-top: 20px;">Ainda não tem uma conta? <a href="criar_conta.html">Crie uma agora</a></p>
     </div>
 
+    <!-- Adicionando o áudio -->
+    <audio id="page-sound" src="click.mp3" preload="auto"></audio>
+
     <script>
-        function loginUser() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // Obtém os registros de usuários armazenados localmente
-            var users = localStorage.getItem("users");
-
-            // Verifica se existem registros de usuários
-            if (users) {
-                // Converte os registros para array
-                users = JSON.parse(users);
-                
-                // Percorre o array para encontrar correspondência de usuário e senha
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].username === username && users[i].password === password) {
-                        // Redireciona para outro_site.html se as credenciais estiverem corretas
-                        window.location.href = "outro_site.html";
-                        return false;
-                    }
-                }
-            }
-
-            // Exibe mensagem de erro se as credenciais estiverem incorretas ou não houver registros
-            alert("Usuário ou senha incorretos.");
-            return false;
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
+        document.getElementById('access-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+            
+            // Reproduz o som
+            var sound = document.getElementById('page-sound');
+            sound.play();
+            
+            // Aguarda a reprodução do som antes de redirecionar
+            sound.onended = function() {
+                document.body.classList.add('fade-out'); // Adiciona a classe de fade-out
+                setTimeout(function() {
+                    window.location.href = 'index.html'; // Redireciona para a página index.html após a animação
+                }, 800); // Duração da animação (800ms)
+            };
+        });
     </script>
 </body>
-
 </html>
