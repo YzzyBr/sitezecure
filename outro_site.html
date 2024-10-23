@@ -21,7 +21,8 @@
 
         /* Container principal */
         .container {
-            max-width: 100%;
+            max-width: 1200px;
+            margin: auto;
             padding: 10px;
             box-sizing: border-box;
         }
@@ -75,6 +76,7 @@
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         h2 {
@@ -115,6 +117,33 @@
 
         .discord-login button:active {
             background-color: #56618d;
+        }
+
+        /* Formulário de contato */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form input, .contact-form textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #218838;
         }
 
         /* Tema escuro */
@@ -160,6 +189,7 @@
                     <li><a href="#tcc">TCC da Escola</a></li>
                     <li><a href="#chats">Chats</a></li>
                     <li><a href="#discord">Discord</a></li>
+                    <li><a href="#contact">Contato</a></li>
                     <li><button class="theme-button">Trocar Tema</button></li>
                 </ul>
             </nav>
@@ -182,6 +212,17 @@
                 <ul>
                     <li><a href="https://i9atech.com/zabbix-o-que-e-quais-suas-funcionalidades/" target="_blank">Assuntos sobre Zabbix</a></li>
                 </ul>
+            </section>
+
+            <section id="contact">
+                <h2>Contato</h2>
+                <p>Se você tiver alguma dúvida, preencha o formulário abaixo:</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Seu Nome" required>
+                    <input type="email" placeholder="Seu Email" required>
+                    <textarea placeholder="Sua Mensagem" rows="4" required></textarea>
+                    <button type="submit">Enviar Mensagem</button>
+                </form>
             </section>
         </main>
 
