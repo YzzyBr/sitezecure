@@ -1,120 +1,277 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZecureGuard - Criar Conta</title>
+    <title>ZecureGuard - Apresentação de Trabalhos</title>
     <style>
-        /* Estilos CSS */
-        body {
+        /* Reset de margens e paddings */
+        body, h1, h2, p, ul, li, button {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #333333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
+        /* Estilo global */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        /* Container principal */
         .container {
-            width: 300px;
-            background-color: #ffffff;
+            max-width: 1200px;
+            margin: auto;
             padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        /* Estilos de cabeçalho */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a, .theme-button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover, .theme-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos de conteúdo */
+        main, aside {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #007bff;
         }
 
-        form {
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        /* Formulário de contato */
+        .contact-form {
             display: flex;
             flex-direction: column;
+            margin-top: 20px;
         }
 
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+        .contact-form input, .contact-form textarea {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
 
-        input[type="submit"] {
-            background-color: #ff0000;
-            color: #ffffff;
+        .contact-form button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 12px;
             border: none;
-            padding: 10px;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        input[type="submit"]:hover {
-            background-color: #ff0000;
+        .contact-form button:hover {
+            background-color: #218838;
         }
 
-        img.logo {
-            display: block;
-            margin: 0 auto;
-            margin-bottom: 20px;
+        /* Estilos do Discord */
+        .discord-login {
+            margin-top: 20px;
+        }
+
+        .discord-login button {
+            background-color: #7289da;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .discord-login button:hover {
+            background-color: #677bc4;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        footer p {
+            margin: 0;
+            color: #6c757d;
+        }
+
+        /* Tema escuro */
+        body.dark-mode {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        .dark-mode nav ul li a, .dark-mode .theme-button {
+            background-color: #495057;
+        }
+
+        .dark-mode nav ul li a:hover, .dark-mode .theme-button:hover {
+            background-color: #6c757d;
+        }
+
+        .dark-mode main, .dark-mode aside {
+            background-color: #495057;
+        }
+
+        .dark-mode h2 {
+            color: #fff;
+        }
+
+        .dark-mode p, .dark-mode ul {
+            color: #ddd;
+        }
+
+        .dark-mode a {
+            color: #87CEEB;
         }
     </style>
 </head>
-
-<body>
+<body class="light-mode">
     <div class="container">
-        <img src="logo.png" alt="Logo" class="logo">
-        <h2>Criar Conta</h2>
-        <form id="registerForm" onsubmit="return registerUser()">
-            <input type="text" id="newUsername" placeholder="Novo Usuário" required>
-            <input type="password" id="newPassword" placeholder="Nova Senha" required>
-            <input type="submit" value="Criar Conta">
-        </form>
+        <header>
+            <img src="logo.png" alt="Logo ZecureGuard">
+            <h1>ZecureGuard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#tcc">TCC da Escola</a></li>
+                    <li><a href="#chats">Chats</a></li>
+                    <li><a href="#discord">Discord</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                    <li><button class="theme-button">Trocar Tema</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="tcc">
+                <h2>TCC da Escola</h2>
+                <p>Aqui você encontrará informações sobre o Trabalho de Conclusão de Curso da escola.</p>
+                <ul>
+                    <li><a href="https://repositorio.utfpr.edu.br/jspui/bitstream/1/26453/1/monitoramentoredeferramentazabbix.pdf" target="_blank">Documento sobre TCC</a></li>
+                    <li>Exemplos de TCCs anteriores</li>
+                    <li>Dicas de orientação e defesa do TCC</li>
+                </ul>
+            </section>
+
+            <section id="chats">
+                <h2>Chats</h2>
+                <p>Aqui você encontrará documentos e assuntos sobre TCC e Zabbix.</p>
+                <ul>
+                    <li><a href="https://i9atech.com/zabbix-o-que-e-quais-suas-funcionalidades/" target="_blank">Assuntos sobre Zabbix</a></li>
+                </ul>
+            </section>
+
+            <section id="contact">
+                <h2>Contato</h2>
+                <p>Se você tiver alguma dúvida, preencha o formulário abaixo:</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Seu Nome" required>
+                    <input type="email" placeholder="Seu Email" required>
+                    <textarea placeholder="Sua Mensagem" rows="4" required></textarea>
+                    <button type="submit">Enviar Mensagem</button>
+                </form>
+            </section>
+        </main>
+
+        <aside id="discord">
+            <h2>Discord</h2>
+            <p>Por favor, faça login no Discord para acessar o chat do servidor:</p>
+            <div class="discord-login">
+                <button>Login no Discord</button>
+            </div>
+            <script async src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
+            <script>
+                const crate = new Crate({
+                    server: '1214904025883877446',
+                    channel: '1214904026827718680'
+                });
+                crate.appendTo('.discord-login');
+            </script>
+        </aside>
     </div>
 
+    <footer>
+        <p>&copy; 2024 ZecureGuard. Todos os direitos reservados.</p>
+    </footer>
+
     <script>
-        // Função para registrar um novo usuário
-        function registerUser() {
-            // Obtém os dados do formulário
-            var newUsername = document.getElementById("newUsername").value;
-            var newPassword = document.getElementById("newPassword").value;
-
-            // Cria um objeto com os dados do novo usuário
-            var newUser = {
-                username: newUsername,
-                password: newPassword
-            };
-
-            // Verifica se já existe algum registro no armazenamento local
-            var users = localStorage.getItem("users");
-            if (!users) {
-                // Se não houver registros, cria um array vazio
-                users = [];
-            } else {
-                // Se houver registros, converte a string para array
-                users = JSON.parse(users);
-            }
-
-            // Adiciona o novo usuário ao array
-            users.push(newUser);
-
-            // Salva o array atualizado no armazenamento local
-            localStorage.setItem("users", JSON.stringify(users));
-
-            // Exibe mensagem de sucesso
-            alert("Conta criada com sucesso! Faça login para continuar.");
-            // Redireciona para a página de login
-            window.location.href = "login.html";
-            return false;
-        }
+        const themeButton = document.querySelector('.theme-button');
+        const body = document.body;
+        themeButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
     </script>
 </body>
-
 </html>
