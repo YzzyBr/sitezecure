@@ -3,275 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZecureGuard - Apresentação de Trabalhos</title>
+    <title>ZecureGuard - TCC</title>
     <style>
-        /* Reset de margens e paddings */
-        body, h1, h2, p, ul, li, button {
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
             margin: 0;
             padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
         }
-
-        /* Estilo global */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef;
-            color: #343a40;
-            line-height: 1.6;
-        }
-
-        /* Container principal */
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            border-radius: 10px;
-        }
-
-        /* Estilos de cabeçalho */
         header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        header img {
-            width: 150px;
-            height: auto;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            color: #007bff;
-        }
-
-        nav {
-            margin-top: 20px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin: 0 10px;
-        }
-
-        nav ul li a, .theme-button {
-            text-decoration: none;
-            color: #fff;
-            background-color: #007bff;
-            padding: 10px 20px;
-            border-radius: 5px;
+            background-color: #c62828;
+            padding: 20px;
             transition: background-color 0.3s ease;
         }
-
-        nav ul li a:hover, .theme-button:hover {
-            background-color: #0056b3;
+        header:hover {
+            background-color: #b71c1c;
         }
-
-        /* Estilos de conteúdo */
-        main, aside {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        img {
+            max-width: 200px;
+            border-radius: 10px;
         }
-
-        h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #007bff;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        /* Formulário de contato */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            margin-top: 20px;
-        }
-
-        .contact-form input, .contact-form textarea {
-            margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .contact-form button {
-            background-color: #28a745;
+        h1 {
+            font-size: 2.5em;
+            margin: 10px 0;
             color: #fff;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
-
-        .contact-form button:hover {
-            background-color: #218838;
+        .category {
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #c62828;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
         }
-
-        /* Estilos do Discord */
-        .discord-login {
-            margin-top: 20px;
+        .category:hover {
+            transform: scale(1.05);
         }
-
-        .discord-login button {
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+        }
+        .clock, .location, .news {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #c62828;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .discord-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
             background-color: #7289da;
             color: #fff;
-            padding: 12px;
-            border: none;
             border-radius: 5px;
-            cursor: pointer;
+            text-decoration: none;
             transition: background-color 0.3s;
         }
-
-        .discord-login button:hover {
-            background-color: #677bc4;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 10px 0;
-            background-color: #f8f9fa;
-            border-top: 1px solid #dee2e6;
-        }
-
-        footer p {
-            margin: 0;
-            color: #6c757d;
-        }
-
-        /* Tema escuro */
-        body.dark-mode {
-            background-color: #343a40;
-            color: #f8f9fa;
-        }
-
-        .dark-mode nav ul li a, .dark-mode .theme-button {
-            background-color: #495057;
-        }
-
-        .dark-mode nav ul li a:hover, .dark-mode .theme-button:hover {
-            background-color: #6c757d;
-        }
-
-        .dark-mode main, .dark-mode aside {
-            background-color: #495057;
-        }
-
-        .dark-mode h2 {
-            color: #fff;
-        }
-
-        .dark-mode p, .dark-mode ul {
-            color: #ddd;
-        }
-
-        .dark-mode a {
-            color: #87CEEB;
+        .discord-link:hover {
+            background-color: #5b6eae;
         }
     </style>
 </head>
-<body class="light-mode">
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="Logo ZecureGuard">
-            <h1>ZecureGuard</h1>
-            <nav>
-                <ul>
-                    <li><a href="#tcc">TCC da Escola</a></li>
-                    <li><a href="#chats">Chats</a></li>
-                    <li><a href="#discord">Discord</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                    <li><button class="theme-button">Trocar Tema</button></li>
-                </ul>
-            </nav>
-        </header>
+<body>
 
-        <main>
-            <section id="tcc">
-                <h2>TCC da Escola</h2>
-                <p>Aqui você encontrará informações sobre o Trabalho de Conclusão de Curso da escola.</p>
-                <ul>
-                    <li><a href="https://repositorio.utfpr.edu.br/jspui/bitstream/1/26453/1/monitoramentoredeferramentazabbix.pdf" target="_blank">Documento sobre TCC</a></li>
-                    <li>Exemplos de TCCs anteriores</li>
-                    <li>Dicas de orientação e defesa do TCC</li>
-                </ul>
-            </section>
+<header>
+    <img src="logo.png" alt="Logo ZecureGuard">
+    <h1>ZecureGuard</h1>
+</header>
 
-            <section id="chats">
-                <h2>Chats</h2>
-                <p>Aqui você encontrará documentos e assuntos sobre TCC e Zabbix.</p>
-                <ul>
-                    <li><a href="https://i9atech.com/zabbix-o-que-e-quais-suas-funcionalidades/" target="_blank">Assuntos sobre Zabbix</a></li>
-                </ul>
-            </section>
+<main>
+    <div class="clock" id="clock"></div>
+    <div class="location" id="location"></div>
+    <div class="news" id="news">Última notícia: Carregando...</div>
 
-            <section id="contact">
-                <h2>Contato</h2>
-                <p>Se você tiver alguma dúvida, preencha o formulário abaixo:</p>
-                <form class="contact-form">
-                    <input type="text" placeholder="Seu Nome" required>
-                    <input type="email" placeholder="Seu Email" required>
-                    <textarea placeholder="Sua Mensagem" rows="4" required></textarea>
-                    <button type="submit">Enviar Mensagem</button>
-                </form>
-            </section>
-        </main>
-
-        <aside id="discord">
-            <h2>Discord</h2>
-            <p>Por favor, faça login no Discord para acessar o chat do servidor:</p>
-            <div class="discord-login">
-                <button>Login no Discord</button>
-            </div>
-            <script async src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
-            <script>
-                const crate = new Crate({
-                    server: '1214904025883877446',
-                    channel: '1214904026827718680'
-                });
-                crate.appendTo('.discord-login');
-            </script>
-        </aside>
+    <div class="category">
+        <h2>Introdução</h2>
+        <p>Aqui você pode colocar um resumo da introdução do seu trabalho.</p>
+    </div>
+    <div class="category">
+        <h2>Desenvolvimento</h2>
+        <p>Aqui você pode descrever o desenvolvimento do seu TCC.</p>
+    </div>
+    <div class="category">
+        <h2>Conclusão</h2>
+        <p>Aqui você pode apresentar as conclusões do seu trabalho.</p>
     </div>
 
-    <footer>
-        <p>&copy; 2024 ZecureGuard. Todos os direitos reservados.</p>
-    </footer>
+    <a class="discord-link" href="https://discord.gg/seu-link" target="_blank">Entre no nosso Discord!</a>
+</main>
 
-    <script>
-        const themeButton = document.querySelector('.theme-button');
-        const body = document.body;
-        themeButton.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
+<footer>
+    <h3>Conecte-se com nós:</h3>
+    <p>
+        <a href="https://www.linkedin.com/in/pessoa1">Pessoa 1</a> |
+        <a href="https://www.linkedin.com/in/pessoa2">Pessoa 2</a> |
+        <a href="https://www.linkedin.com/in/pessoa3">Pessoa 3</a> |
+        <a href="https://www.linkedin.com/in/pessoa4">Pessoa 4</a>
+    </p>
+    <p>Todos os direitos reservados ZecureGuard 2024</p>
+</footer>
+
+<script>
+    // Relógio em tempo real
+    function updateClock() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('pt-BR');
+        document.getElementById('clock').textContent = `Hora atual: ${timeString}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Localização
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                document.getElementById('location').textContent = `Localização: Latitude ${lat}, Longitude ${lon}`;
+            });
+        } else {
+            document.getElementById('location').textContent = 'Geolocalização não suportada.';
+        }
+    }
+    getLocation();
+
+    // Última notícia (simulação)
+    fetch('https://newsapi.org/v2/top-headlines?country=br&apiKey=7e78ab0e8afa4b17a968ade146fe7f0a')
+        .then(response => response.json())
+        .then(data => {
+            const news = data.articles[0].title;
+            document.getElementById('news').textContent = `Última notícia: ${news}`;
+        })
+        .catch(error => {
+            document.getElementById('news').textContent = 'Erro ao carregar notícia.';
         });
-    </script>
+</script>
+
 </body>
 </html>
