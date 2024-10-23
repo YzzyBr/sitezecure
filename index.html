@@ -68,6 +68,28 @@
         .discord-link:hover {
             background-color: #5b6eae;
         }
+        .search-container {
+            margin: 20px;
+        }
+        .search-input {
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #c62828;
+            border-radius: 5px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #c62828;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-button:hover {
+            background-color: #b71c1c;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +103,11 @@
     <div class="clock" id="clock"></div>
     <div class="location" id="location"></div>
     <div class="news" id="news">Última notícia: Carregando...</div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar notícias...">
+        <button class="search-button" onclick="searchNews()">Buscar</button>
+    </div>
 
     <div class="category">
         <h2>Introdução</h2>
@@ -133,16 +160,37 @@
     }
     getLocation();
 
-    // Última notícia (simulação)
-    fetch('https://newsapi.org/v2/top-headlines?country=br&apiKey=7e78ab0e8afa4b17a968ade146fe7f0a')
-        .then(response => response.json())
-        .then(data => {
-            const news = data.articles[0].title;
-            document.getElementById('news').textContent = `Última notícia: ${news}`;
-        })
-        .catch(error => {
-            document.getElementById('news').textContent = 'Erro ao carregar notícia.';
-        });
+    // Última notícia
+    function fetchLatestNews() {
+        fetch('https://newsapi.org/v2/top-headlines?country=br&apiKey=7e78ab0e8afa4b17a968ade146fe7f0a')
+            .then(response => response.json())
+            .then(data => {
+                const news = data.articles[0].title;
+                document.getElementById('news').textContent = `Última notícia: ${news}`;
+            })
+            .catch(error => {
+                document.getElementById('news').textContent = 'Erro ao carregar notícia.';
+            });
+    }
+    fetchLatestNews();
+
+    // Busca de notícias
+    function searchNews() {
+        const query = document.getElementById('searchInput').value;
+        fetch(`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=7e78ab0e8afa4b17a968ade146fe7f0a`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.articles.length > 0) {
+                    const latestArticle = data.articles[0].title;
+                    document.getElementById('news').textContent = `Última notícia sobre "${query}": ${latestArticle}`;
+                } else {
+                    document.getElementById('news').textContent = 'Nenhuma notícia encontrada.';
+                }
+            })
+            .catch(error => {
+                document.getElementById('news').textContent = 'Erro ao carregar notícia.';
+            });
+    }
 </script>
 
 </body>
