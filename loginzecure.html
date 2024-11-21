@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZecureGuard - TCC</title>
+    <title>ZecureGuard</title>
+    <!-- Favicon (Logo pequena na guia do navegador) -->
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Link para os ícones do Font Awesome -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +22,7 @@
             transition: background-color 0.3s ease;
         }
         header:hover {
-            background-color: #b71c1c;
+            background-color: #8d0606;
         }
         img {
             max-width: 200px;
@@ -41,13 +44,17 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .category {
-            margin: 20px;
-            padding: 20px;
+            margin: 10px;
+            padding: 10px;
             border: 2px solid #c62828;
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
+            width: 90%; /* Ajustando a largura para evitar que ultrapasse as bordas */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .category:hover {
             transform: scale(1.05);
@@ -57,55 +64,39 @@
             font-size: 14px;
             color: #777;
         }
-        .news {
-            margin: 20px;
-            padding: 15px;
-            border: 1px solid #c62828;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
+        .social-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #c62828;
+        }
+        .social-links .fa {
+            font-size: 2em; /* Tamanho maior para ícones */
+        }
+        /* Estilo para o botão do Discord */
         .discord-link {
             display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
+            padding: 12px 30px;
             background-color: #7289da;
-            color: #fff;
+            color: white;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
         .discord-link:hover {
             background-color: #5b6eae;
-        }
-        .search-container {
-            margin: 20px;
-        }
-        .search-input {
-            padding: 10px;
-            width: 300px;
-            border: 2px solid #c62828;
-            border-radius: 5px;
-        }
-        .search-button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            background-color: #c62828;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .search-button:hover {
-            background-color: #b71c1c;
-        }
-        .search-results {
-            margin: 20px;
-            text-align: left;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            transform: scale(1.05); /* Efeito de zoom no botão */
         }
     </style>
 </head>
@@ -118,13 +109,6 @@
 
 <main>
     <div class="clock" id="clock">Carregando...</div>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Buscar notícias...">
-        <button class="search-button" onclick="searchNews()">Buscar</button>
-    </div>
-
-    <div class="search-results" id="searchResults"></div>
 
     <div class="category">
         <h2>Introdução</h2>
@@ -139,18 +123,23 @@
         <p>Aqui você pode apresentar as conclusões do seu trabalho.</p>
     </div>
 
+    <!-- Botão de acesso ao Discord estilizado -->
     <a class="discord-link" href="https://discord.gg/seu-link" target="_blank">Entre no nosso Discord!</a>
 </main>
 
 <footer>
-    <h3>Conecte-se com nós:</h3>
-    <p>
-        <a href="https://www.linkedin.com/in/pessoa1">Pessoa 1</a> |
-        <a href="https://www.linkedin.com/in/pessoa2">Pessoa 2</a> |
-        <a href="https://www.linkedin.com/in/pessoa3">Pessoa 3</a> |
-        <a href="https://www.linkedin.com/in/pessoa4">Pessoa 4</a>
-    </p>
-    <p>Todos os direitos reservados ZecureGuard 2024</p>
+    <h3>Conecte-se conosco:</h3>
+    <div class="social-links">
+        <!-- Links para LinkedIn e Instagram com ícones -->
+        <a href="https://www.linkedin.com/in/zecureguard-ofc-a480b333a/" target="_blank">
+            <i class="fab fa-linkedin"></i> ZecureGuard
+        </a>
+        
+        <a href="https://www.instagram.com/zecureguard" target="_blank">
+            <i class="fab fa-instagram"></i> ZecureGuard
+        </a>
+    </div>
+    <p>© 2023-2024 ZecureGuard</p>
 </footer>
 
 <script>
@@ -162,30 +151,6 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-
-    // Simulação de busca de notícias
-    function searchNews() {
-        const query = document.getElementById('searchInput').value;
-        const resultsDiv = document.getElementById('searchResults');
-        resultsDiv.innerHTML = ''; // Limpa resultados anteriores
-
-        // Simulação de notícias
-        const simulatedNews = [
-            `Notícia sobre ${query} 1: Exemplos de conteúdo.`,
-            `Notícia sobre ${query} 2: Exemplos de conteúdo.`,
-            `Notícia sobre ${query} 3: Exemplos de conteúdo.`
-        ];
-
-        if (simulatedNews.length > 0) {
-            simulatedNews.forEach(news => {
-                const newsElement = document.createElement('p');
-                newsElement.textContent = news;
-                resultsDiv.appendChild(newsElement);
-            });
-        } else {
-            resultsDiv.textContent = 'Nenhuma notícia encontrada.';
-        }
-    }
 </script>
 
 </body>
