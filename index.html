@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZecureGuard - Acesso</title>
+    <meta name="description" content="Bem-vindo à ZecureGuard. Sua plataforma de segurança confiável.">
+    <meta name="author" content="ZecureGuard">
+    <meta name="theme-color" content="#4b0000">
+    <title>ZecureGuard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+
     <style>
+        /* Estilos principais */
         * {
             margin: 0;
             padding: 0;
@@ -16,32 +24,62 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f7f7f7;
+            background: linear-gradient(135deg, #4b0000, #800000);
             font-family: Arial, sans-serif;
             overflow: hidden;
-            background-color: #4b0000; /* Vermelho um pouco mais vibrante */
+            position: relative;
         }
 
-        /* Efeito de transição da página */
         body.fade-out {
             opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 1s ease;
         }
 
+        /* Partículas de fundo */
+        .background-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(30px);
+                opacity: 0;
+            }
+        }
+
+        /* Container principal */
         .login-container {
             text-align: center;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 50px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            width: 100%;
             max-width: 400px;
+            width: 90%;
             animation: zoom-in 1s ease-out;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Efeito de hover na caixa de login */
         .login-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
@@ -49,7 +87,7 @@
 
         .logo img {
             width: 120px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             animation: slide-down 1s ease-out;
         }
 
@@ -57,13 +95,8 @@
             font-size: 28px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             animation: fade-in 1.2s ease-out;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
         }
 
         .login-form button {
@@ -75,20 +108,8 @@
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
             animation: fade-in 1.5s ease-out, pulse 2s infinite;
-        }
-
-        /* Efeito de pulso no botão */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
         }
 
         .login-form button:hover {
@@ -96,81 +117,86 @@
             transform: scale(1.1);
         }
 
-        .login-form button:active {
-            background-color: #f44336;
-        }
-
         .login-form button:focus {
             outline: none;
             box-shadow: 0 0 5px 2px rgba(211, 47, 47, 0.6);
         }
 
-        /* Animação para logo e título */
+        /* Animações */
         @keyframes slide-down {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fade-in {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         @keyframes zoom-in {
-            0% {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
     </style>
 </head>
 <body>
+    <!-- Partículas de fundo -->
+    <div class="background-particles"></div>
+
+    <!-- Conteúdo principal -->
     <div class="login-container">
         <!-- Logo -->
         <div class="logo">
-            <img src="logo.png" alt="Logo">
+            <img src="logo.png" alt="Logo da ZecureGuard">
         </div>
+        
         <!-- Nome da marca -->
         <div class="brand">ZecureGuard</div>
+        
         <!-- Formulário -->
         <form class="login-form">
             <button type="button" id="access-btn">Acessar</button>
         </form>
     </div>
 
-    <!-- Adicionando o áudio -->
-    <audio id="page-sound" src="click.mp3" preload="auto"></audio>
-
     <script>
-        document.getElementById('access-btn').addEventListener('click', function(event) {
-            event.preventDefault(); // Evita o comportamento padrão de envio do formulário
-            
-            // Reproduz o som
-            var sound = document.getElementById('page-sound');
-            sound.play();
-            
-            // Aguarda a reprodução do som antes de redirecionar
-            sound.onended = function() {
-                document.body.classList.add('fade-out'); // Adiciona a classe de fade-out
-                setTimeout(function() {
-                    window.location.href = 'loginzecure.html'; // Redireciona para a página index.html após a animação
-                }, 800); // Duração da animação (800ms)
-            };
-        });
+        // Função para redirecionar com fade-out
+        function redirectToLogin() {
+            const sound = document.getElementById('page-sound');
+            if (sound) sound.play();
+
+            // Adiciona a classe de fade-out ao corpo
+            document.body.classList.add('fade-out');
+
+            // Aguarda o término do efeito para redirecionar
+            setTimeout(() => {
+                window.location.href = "loginzecure.html";
+            }, 1000); // Tempo da transição
+        }
+
+        // Adiciona partículas dinamicamente
+        const particleContainer = document.querySelector('.background-particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 10 + 5; // Tamanho entre 5 e 15px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 8 + 4}s`;
+            particleContainer.appendChild(particle);
+        }
+
+        // Adiciona evento ao botão
+        document.getElementById('access-btn').addEventListener('click', redirectToLogin);
     </script>
+
+    <!-- Áudio de clique -->
+    <audio id="page-sound" src="click.mp3" preload="auto"></audio>
 </body>
 </html>
