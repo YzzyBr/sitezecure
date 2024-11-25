@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -103,11 +103,10 @@
             background-color: #5b6eae;
             transform: scale(1.05);
         }
-        /* Estilo para os botões de tema claro/escuro e coração */
-        .theme-toggle, .heart-button {
+        /* Estilo para os botões de tema claro/escuro, coração e admin */
+        .theme-toggle, .heart-button, .admin-button {
             position: absolute;
             top: 20px;
-            right: 20px;
             background: none;
             border: none;
             font-size: 1.6em;
@@ -117,14 +116,25 @@
             z-index: 2;
         }
 
+        /* Botões na direita */
+        .theme-toggle {
+            right: 20px;
+        }
+
         .heart-button {
             right: 80px;
         }
 
-        .theme-toggle:hover, .heart-button:hover {
+        /* Botão de admin à esquerda */
+        .admin-button {
+            left: 20px;
+        }
+
+        .theme-toggle:hover, .heart-button:hover, .admin-button:hover {
             color: #f0f0f0;
             transform: scale(1.1);
         }
+
         /* Tema Escuro */
         body.dark-theme {
             background-color: #333;
@@ -178,7 +188,7 @@
 </head>
 <body>
 
-<!-- Botões de tema claro/escuro e coração -->
+<!-- Botões de tema claro/escuro, coração e admin -->
 <button class="theme-toggle" onclick="toggleTheme()">
     <i class="fas fa-lightbulb"></i>
 </button>
@@ -186,6 +196,11 @@
 <button class="heart-button" onclick="goToThanksPage()">
     <i class="fas fa-heart"></i>
 </button>
+
+<!-- Botão de acesso ao painel de admin -->
+<a href="acessoadmin.html" class="admin-button">
+    <i class="fas fa-user-lock"></i> <!-- Ícone de usuário -->
+</a>
 
 <header>
     <img src="logo.png" alt="Logo ZecureGuard">
