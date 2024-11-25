@@ -15,11 +15,15 @@
             padding: 0;
             background-color: #f0f0f0;
             color: #333;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden; /* Impede que o scroll horizontal ocorra */
         }
         header {
             background-color: #610808;
             padding: 20px;
             transition: background-color 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
         header:hover {
             background-color: #8d0606;
@@ -42,6 +46,7 @@
             margin: 20px auto;
             width: fit-content;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #333; /* Cor do relógio no modo claro */
         }
         .category {
             margin: 10px;
@@ -51,7 +56,7 @@
             background-color: #fff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
-            width: 90%; /* Ajustando a largura para evitar que ultrapasse as bordas */
+            width: 90%;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -80,7 +85,7 @@
             color: #c62828;
         }
         .social-links .fa {
-            font-size: 2em; /* Tamanho maior para ícones */
+            font-size: 2em;
         }
         /* Estilo para o botão do Discord */
         .discord-link {
@@ -96,11 +101,91 @@
         }
         .discord-link:hover {
             background-color: #5b6eae;
-            transform: scale(1.05); /* Efeito de zoom no botão */
+            transform: scale(1.05);
         }
+        /* Estilo para os botões de tema claro/escuro e coração */
+        .theme-toggle, .heart-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.6em;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s ease-in-out;
+            z-index: 2;
+        }
+
+        .heart-button {
+            right: 80px;
+        }
+
+        .theme-toggle:hover, .heart-button:hover {
+            color: #f0f0f0;
+            transform: scale(1.1);
+        }
+        /* Tema Escuro */
+        body.dark-theme {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        body.dark-theme header {
+            background-color: #444;
+        }
+        body.dark-theme .category {
+            background-color: #555;
+            border-color: #888;
+        }
+        body.dark-theme .discord-link {
+            background-color: #3b4b93;
+        }
+        body.dark-theme .discord-link:hover {
+            background-color: #2c3d72;
+        }
+        body.dark-theme .clock {
+            color: #fff; /* Cor do relógio no tema escuro */
+            background-color: #555; /* Cor de fundo do relógio no tema escuro */
+            border-color: #888; /* Cor da borda do relógio no tema escuro */
+        }
+
+        /* Ajustes nos ícones de redes sociais no tema escuro */
+        body.dark-theme .social-links a {
+            color: #e2e2e2; /* Ícones de redes sociais em cinza claro no tema escuro */
+        }
+
+        body.dark-theme .social-links a:hover {
+            color: #c62828; /* Cor do hover ainda é um vermelho para destaque */
+        }
+
+        /* Animação de transição para a página de agradecimento */
+        .transition-effect {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px); /* Movimento mais suave */
+            }
+        }
+
     </style>
 </head>
 <body>
+
+<!-- Botões de tema claro/escuro e coração -->
+<button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-lightbulb"></i>
+</button>
+
+<button class="heart-button" onclick="goToThanksPage()">
+    <i class="fas fa-heart"></i>
+</button>
 
 <header>
     <img src="logo.png" alt="Logo ZecureGuard">
@@ -130,7 +215,6 @@
 <footer>
     <h3>Conecte-se conosco:</h3>
     <div class="social-links">
-        <!-- Links para LinkedIn e Instagram com ícones -->
         <a href="https://www.linkedin.com/in/zecureguard-ofc-a480b333a/" target="_blank">
             <i class="fab fa-linkedin"></i> ZecureGuard
         </a>
@@ -139,7 +223,7 @@
             <i class="fab fa-instagram"></i> ZecureGuard
         </a>
     </div>
-    <p>© 2023-2024 ZecureGuard</p>
+    <p>© 2023-2024 ZecureGuard | Todos os direitos reservados.</p>
 </footer>
 
 <script>
@@ -151,6 +235,22 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    // Função para alternar entre tema claro e escuro
+    function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+    }
+
+    // Função para redirecionar com animação de transição
+    function goToThanksPage() {
+        // Adicionar a animação de transição
+        document.body.classList.add('transition-effect');
+
+        // Redirecionar após a animação
+        setTimeout(function() {
+            window.location.href = 'thanks.html'; // Redireciona após a animação
+        }, 500); // Aguardar a animação finalizar antes de redirecionar
+    }
 </script>
 
 </body>
