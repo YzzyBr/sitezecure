@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZecureGuard</title>
+    <!-- Favicon (Logo pequena na guia do navegador) -->
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Link para os ícones do Font Awesome -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background-color: #610808;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        header:hover {
+            background-color: #8d0606;
+        }
+        img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        /* Estilo para o botão de retorno */
+        .back-button {
+            position: fixed; /* Fixo para o botão ficar visível sempre */
+            top: 20px;
+            left: 20px;
+            background-color: #610808;
+            color: white;
+            border: 2px solid #610808;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 10; /* Para garantir que o botão fique por cima de outros elementos */
+        }
+
+        .back-button i {
+            margin-right: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #8d0606;
+            border-color: #8d0606;
+            transform: scale(1.05);
+        }
+
+        .thank-you-message {
+            font-size: 2em;
+            color: #333;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .thank-you-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .thank-you-list {
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .thank-you-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .thank-you-list li {
+            margin-bottom: 15px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.6em;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, color 0.3s ease-in-out;
+            z-index: 2;
+        }
+
+        .theme-toggle:hover {
+            color: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #c62828;
+        }
+
+        .social-links .fa {
+            font-size: 2em;
+        }
+
+        /* Tema Escuro */
+        body.dark-theme {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        body.dark-theme header {
+            background-color: #444;
+        }
+
+        body.dark-theme h1, body.dark-theme .thank-you-message, body.dark-theme .thank-you-list li {
+            color: #f0f0f0; /* Cor do texto em claro no tema escuro */
+        }
+
+        body.dark-theme footer {
+            color: #ccc; /* Cor mais clara para o rodapé no tema escuro */
+        }
+
+        body.dark-theme .category {
+            background-color: #555;
+            border-color: #888;
+        }
+
+        body.dark-theme .discord-link {
+            background-color: #3b4b93;
+        }
+
+        body.dark-theme .discord-link:hover {
+            background-color: #2c3d72;
+        }
+
+        body.dark-theme .clock {
+            color: #fff; /* Cor do relógio no tema escuro */
+            background-color: #555; /* Cor de fundo do relógio no tema escuro */
+            border-color: #888; /* Cor da borda do relógio no tema escuro */
+        }
+
+        /* Ajuste para os ícones de redes sociais no tema escuro */
+        body.dark-theme .social-links a {
+            color: #f0f0f0; /* Ícones de redes sociais em branco no tema escuro */
+        }
+
+        body.dark-theme .social-links a:hover {
+            color: #c62828; /* Mudança de cor no hover dos ícones */
+        }
+
+        /* Ajustes no botão de retorno no tema escuro */
+        body.dark-theme .back-button {
+            background-color: #444; /* Fundo mais escuro no tema escuro */
+            border-color: #444; /* Borda mais escura */
+            color: white;
+        }
+
+        body.dark-theme .back-button:hover {
+            background-color: #333; /* Cor de fundo mais escura no hover */
+            border-color: #333; /* Borda mais escura */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botões de tema claro/escuro -->
+<button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-lightbulb"></i>
+</button>
+
+<!-- Botão de retornar para a página inicial -->
+<a href="loginzecure.html" class="back-button">
+    <i class="fas fa-arrow-left"></i> Retornar
+</a>
+
+<header>
+    <img src="logo.png" alt="Logo ZecureGuard">
+    <h1>ZecureGuard</h1>
+</header>
+
+<main>
+    <!-- Mensagem principal de agradecimento -->
+    <div class="thank-you-message">
+        <p>A ZecureGuard é o resultado de muito esforço, dedicação e colaboração. Não poderíamos ter chegado até aqui sem o apoio fundamental de várias pessoas e instituições.</p>
+        <p>Este projeto é uma verdadeira jornada, e somos gratos por cada contribuição que ajudou a torná-lo realidade.</p>
+    </div>
+
+    <!-- Imagem de agradecimento -->
+    <img src="logo.png" alt="Foto da equipe" class="thank-you-image">
+
+    <!-- Lista de agradecimentos específicos -->
+    <div class="thank-you-list">
+        <h2>Agradecimentos Especiais:</h2>
+        <ul>
+            <li><strong>Professores [Waldemar Dibiazi junior e Claudio Afonso Pires]</strong> – Pelo apoio e orientação durante a construção do nosso TCC.</li>
+            <li><strong>Instituição [ETEC - Santa rosa de viterbo]</strong> – Pelo suporte e infraestrutura fornecidos.</li>
+            <li><strong>Equipe de Desenvolvimento</strong> – Por trabalhar junto para transformar a visão da ZecureGuard em realidade.</li>
+        </ul>
+    </div>
+
+    <!-- Citação Inspiradora -->
+    <div class="thank-you-message">
+        <p>"Juntos, somos mais fortes." — Um agradecimento especial a todos que fizeram parte dessa história.</p>
+    </div>
+
+    <!-- Conclusão Motivacional -->
+    <div class="thank-you-message">
+        <p>Este projeto não é o fim, mas o começo de uma jornada contínua. A ZecureGuard seguirá em frente, sempre em busca de inovação e excelência.</p>
+    </div>
+</main>
+
+<footer>
+    <h3>Conecte-se conosco:</h3>
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/zecureguard-ofc-a480b333a/" target="_blank">
+            <i class="fab fa-linkedin"></i> ZecureGuard
+        </a>
+        <a href="https://www.instagram.com/zecureguard" target="_blank">
+            <i class="fab fa-instagram"></i> ZecureGuard
+        </a>
+    </div>
+    <p>© 2023-2024 ZecureGuard | Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    // Função para alternar entre tema claro e escuro
+    function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+    }
+</script>
+
+</body>
+</html>
