@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login ZecureGuard</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        /* Resetando algumas margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #610808;
+            padding: 20px 0;
+            z-index: 10;
+        }
+
+        .header .logo {
+            margin-left: 20px;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .login-container {
+            background-color: white;
+            border: 2px solid #c62828;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        .login-container img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #610808;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #c62828;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #8d0606;
+            outline: none;
+        }
+
+        .login-btn {
+            background-color: #610808;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #8d0606;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        footer p {
+            color: #610808;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Logo ZecureGuard">
+            <span>ZecureGuard</span>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <img src="logo.png" alt="Logo ZecureGuard">
+        <h2>Login ZecureGuard</h2>
+        <form id="loginForm" onsubmit="return validateLogin(event)">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Usuário" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Senha" required>
+            </div>
+            <button type="submit" class="login-btn">Entrar</button>
+        </form>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 - 2024 ZecureGuard | Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function validateLogin(event) {
+            event.preventDefault(); // Impede o envio do formulário para garantir que o código funcione sem reload
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Checando as credenciais
+            if (username === 'ZecureGuard' && password === 'Admin') {
+                // Redireciona para a página após o login correto
+                window.location.href = 'admin.html'; // Substitua com a página do painel
+            } else {
+                // Mostra mensagem de erro
+                errorMessage.textContent = 'Usuário ou senha incorretos. Tente novamente.';
+            }
+        }
+    </script>
+
+</body>
+</html>

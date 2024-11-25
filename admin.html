@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - ZecureGuard</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo da página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 80px; /* Espaço para o cabeçalho fixo */
+            padding-bottom: 60px; /* Espaço para o rodapé */
+        }
+
+        /* Cabeçalho fixo */
+        .header {
+            background-color: #610808;
+            color: white;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo img {
+            width: 40px;
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+        }
+
+        /* Botão de "Página Inicial" */
+        .home-icon {
+            margin-left: auto;
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 10px 20px;
+            background-color: #5865f2; /* Cor semelhante ao botão do Discord */
+            border-radius: 5px;
+            border: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .home-icon:hover {
+            background-color: #4752c4;
+        }
+
+        .home-icon i {
+            margin-right: 8px;
+        }
+
+        /* Estilo do conteúdo principal */
+        .main-content {
+            width: 90%;
+            max-width: 900px;
+            text-align: center;
+            margin-top: 20px; /* Ajuste para o espaço após o cabeçalho fixo */
+        }
+
+        .main-content h2 {
+            font-size: 2em;
+            color: #610808;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo do formulário de envio */
+        .webhook-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .webhook-container h3 {
+            font-size: 1.8em;
+            color: #610808;
+            margin-bottom: 20px;
+        }
+
+        .webhook-container label {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: left;
+            display: block;
+        }
+
+        .webhook-container input,
+        .webhook-container textarea,
+        .webhook-container button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #610808;
+            font-size: 1.1em;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .webhook-container input:focus,
+        .webhook-container textarea:focus {
+            border-color: #8d0606;
+            outline: none;
+        }
+
+        /* Quando a mensagem é enviada com sucesso */
+        .webhook-container.success input,
+        .webhook-container.success textarea,
+        .webhook-container.success button {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+
+        /* Quando a mensagem falha */
+        .webhook-container.error input,
+        .webhook-container.error textarea,
+        .webhook-container.error button {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+
+        .webhook-container button {
+            background-color: #610808;
+            color: white;
+            cursor: pointer;
+            border: 2px solid #610808;
+            font-size: 1.2em;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .webhook-container button:hover {
+            background-color: #8d0606;
+            border-color: #8d0606;
+        }
+
+        /* Mensagens de status */
+        .status-message {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #28a745;
+        }
+
+        .status-message.error {
+            color: #dc3545;
+        }
+
+        /* Estilo para o Widget do Discord */
+        .discord-widget {
+            margin-top: 40px; /* Espaçamento entre o formulário e o widget */
+            width: 100%;
+        }
+
+        .discord-widget iframe {
+            border-radius: 10px;
+            width: 100%;
+            height: 500px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #610808;
+            color: white;
+            text-align: center;
+            padding: 25px 10px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            border-radius: 0 0 5px 5px;
+            font-size: 1.1em;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #8d0606;
+            text-decoration: none;
+        }
+
+        /* Modal de Confirmação */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            color: #610808;
+        }
+
+        .modal-content button {
+            background-color: #610808;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content button:hover {
+            background-color: #8d0606;
+        }
+
+        .modal-content .cancel-btn {
+            background-color: #d9534f;
+            margin-left: 20px;
+        }
+
+        .modal-content .cancel-btn:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho fixo -->
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Logo ZecureGuard">
+            <h1>ZecureGuard</h1>
+        </div>
+
+        <!-- Ícone de Página Inicial -->
+        <div class="home-icon" onclick="openModal()">
+            <i class="fa fa-home"></i> Página Inicial
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <h2>Bem-vindo ao Painel Administrativo ZecureGuard</h2>
+        <p>Enviaremos mensagens diretamente para o canal do Discord.</p>
+
+        <!-- Formulário para enviar a mensagem -->
+        <div class="webhook-container" id="formulario">
+            <h3>Enviar Mensagem</h3>
+            <label for="usuario">Usuário:</label>
+            <input type="text" id="usuario" placeholder="Digite seu nome" required>
+
+            <label for="assunto">Assunto:</label>
+            <input type="text" id="assunto" placeholder="Digite o assunto" required>
+
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" placeholder="Digite sua mensagem" rows="5" required></textarea>
+
+            <button onclick="enviarMensagem()">Enviar</button>
+
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+
+        <!-- Widget do Discord -->
+        <div class="discord-widget">
+            <iframe src="https://discord.com/widget?id=1214904025883877446&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2023 ZecureGuard | Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Tem certeza que deseja voltar para a página inicial?</h3>
+            <button onclick="redirectToHome()">Sim</button>
+            <button class="cancel-btn" onclick="closeModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para abrir o modal de confirmação
+        function openModal() {
+            document.getElementById('confirmationModal').style.display = 'flex';
+        }
+
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+
+        // Função para redirecionar o usuário para a página inicial
+        function redirectToHome() {
+            window.location.href = 'zecureguard.html';
+        }
+
+        // Função para enviar a mensagem via Webhook
+        async function enviarMensagem() {
+            const usuario = document.getElementById('usuario').value;
+            const assunto = document.getElementById('assunto').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const formulario = document.getElementById('formulario');
+
+            if (!usuario || !assunto || !mensagem) {
+                document.getElementById('statusMessage').textContent = "Todos os campos são obrigatórios.";
+                document.getElementById('statusMessage').classList.add("error");
+                formulario.classList.add("error");
+                return;
+            }
+
+            const webhookUrl = "https://discord.com/api/webhooks/1310597340008026205/6ktD11nD1fqlD8qW5jnp7fdMebM0s3m08mosq44as3IOPIawW-H8m20jRhYS9yfv4APn";
+            const payload = {
+                content: `**Usuário:** ${usuario}\n**Assunto:** ${assunto}\n**Mensagem:** ${mensagem}`,
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    document.getElementById('statusMessage').textContent = "Mensagem enviada com sucesso!";
+                    document.getElementById('statusMessage').classList.remove("error");
+                    document.getElementById('statusMessage').classList.add("success");
+                    formulario.classList.add("success");
+                } else {
+                    throw new Error("Erro ao enviar mensagem.");
+                }
+            } catch (error) {
+                document.getElementById('statusMessage').textContent = "Erro ao enviar mensagem.";
+                document.getElementById('statusMessage').classList.add("error");
+                formulario.classList.add("error");
+            }
+        }
+    </script>
+</body>
+</html>
